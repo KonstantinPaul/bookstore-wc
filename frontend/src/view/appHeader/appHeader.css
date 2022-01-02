@@ -1,0 +1,78 @@
+/* 
+  Created on : 28.12.2021
+  Author     : konstantin
+  Description: This is for the <app-header> element
+*/
+
+header {
+  display: grid;
+  grid-template-columns: minmax(0, 0.1fr) 7fr 5fr minmax(0, 0.5fr);
+  grid-template-areas:
+    "bl headerInfo theme br"
+    "bl headerInfo theme br";
+  grid-gap: 0.5rem;
+  padding: 1vmin;
+}
+
+.header-info {
+  grid-area: headerInfo;
+}
+
+.theme-section {
+  grid-area: theme;
+}
+
+/** Style header info: like title, lead text and logo **/
+
+.title,
+.lead {
+  /** reset margins **/
+  margin: 0;
+}
+
+.title {
+  font-size: 2.5rem;
+  text-transform: capitalize;
+  font-variant: small-caps;
+}
+
+.header-logo {
+  font-size: max(3vmax, 2.5rem);
+}
+
+.lead {
+  font-style: italic;
+  font-weight: normal;
+  max-width: 55ch; /** "force" to break into separate lines **/
+  font-size: 1.1rem;
+}
+
+
+/** Theme switcher is styled in here **/
+
+.theme-section {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 5px;
+}
+
+.theme-section label {
+  font-size: 1.1rem;
+  font-weight: lighter;
+  cursor: pointer;
+}
+
+@media all and (max-width: 768px) {
+  header {
+    grid-template-areas:
+      "bl theme theme br"
+      "bl headerInfo headerInfo br";
+    grid-gap: 0;
+    padding: 1vmin;
+  }
+
+  .theme-section {
+    justify-content: right;
+  }
+}

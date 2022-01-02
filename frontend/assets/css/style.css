@@ -1,0 +1,27 @@
+body {
+  /** get some space between body elements */
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--backgroundColor, white);
+  color: var(--foregroundColor, black);
+}
+
+app-header {
+  background-color: burlywood;
+  background-color: hsl(
+    34, 57%, calc(var(--appHeaderBGLightness, 70) * 1%)
+  );
+
+}
+
+/** center main element */
+#main {
+  display: grid;
+  margin: auto;
+  width: 95vw;
+  max-width: 1400px; /** fix width for wider screens **/
+  padding-top: 1vh; /** add some padding for messages and viewSpace **/
+}
+

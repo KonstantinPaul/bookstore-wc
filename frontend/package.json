@@ -1,0 +1,28 @@
+{
+  "name": "tl1-bookstore",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "This is a bookstore developed with VanillaJS by MVC-Pattern and some TDD for the models (using jest)",
+  "main": "app.js",
+  "scripts": {
+    "test": "node ./staticServer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.rz.uni-bamberg.de/minf/projects/ws21-22/mi-proj-g1/-/tree/master"
+  },
+  "keywords": [
+    "VanillaJS",
+    "MVC",
+    "BookStore",
+    "TDD",
+    "mocha"
+  ],
+  "author": "Konstantin Oliver Paul, Alexander Stretz, Michael Manfred Batz, Theresa Schaller",
+  "license": "CC-BY-3.0-DE",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3",
+    "sinon": "^12.0.1"
+  }
+}

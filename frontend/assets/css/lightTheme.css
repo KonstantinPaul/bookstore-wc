@@ -1,0 +1,15 @@
+/** Set some variables **/
+:root {
+  --foregroundColor: black;
+  --backgroundColor: white;
+  --linkColor: #0F52BA; /** Sapphire (blue) **/
+  --appHeaderBGLightness: 70;
+
+  /** All varialbes for book list **/
+  --tableHeadColor: initial;
+  --tableHeadBackgroundColor: initial;
+
+  --rowFocusColor: initial;
+  --tableCellBackgroundColorEven: initial;
+  --tableCellBorderColor: initial;
+}

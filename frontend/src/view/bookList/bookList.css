@@ -1,0 +1,68 @@
+/** Add CSS for book list styling 
+ *  Currently the "book list" is a table
+ **/
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/** cell styling **/
+table td, table th {
+  border: 1px solid var(--tableCellBorderColor, #ddd);
+  padding: 8px;
+}
+
+/** accordion effect (switching row background color) */
+tbody tr:nth-child(even) {
+  background-color: var(--tableCellBackgroundColorEven, #f2f2f2);
+}
+
+tbody tr:hover {
+  background-color: var(--rowFocusColor, lightgrey);
+}
+
+/* Style table header */
+thead th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--tableHeadBackgroundColor, #2A8000);
+  color: var(--tableHeadColor, whitesmoke);
+}
+
+/** Style table row elements like detail-link and button **/
+.detail-link {
+  color: var(--linkColor, #0F52BA); /** default: Sapphire (blue) **/
+}
+
+/** Make button padding smaller (default = 1) */
+tr .btn-delete {
+  --button-padding-vmin: .5;
+}
+
+/** Deleting button */
+
+tbody tr.in-deletion {
+  pointer-events: none; /** prevent interaction with row */
+  opacity: 0.8;
+  background-color: var(--disabledBackgroundColor, grey);
+}
+
+.delete-animation {
+  animation-duration: 900ms;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.animate-moveright {
+  animation-name: moveright;
+}
+
+@keyframes moveright {
+  to {
+    transform: translateX(100%);
+  }
+}
+

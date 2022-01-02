@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Mocha tests for our book app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.svg">
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+
+    <script type="module" class="mocha-init">
+        mocha.setup('bdd');
+    </script>
+
+    <!-- ------------------------------------ -->
+    <!-- All tests for BookStore.js -->
+    <script type="module" src="./model/BookStore-GetBooks.test.js"></script>
+    <script type="module" src="./model/BookStore-AddBook.test.js"></script>
+    <script type="module" src="./model/BookStore-GetBookDetails.test.js"></script>
+    <script type="module" src="./model/BookStore-DeleteBook.test.js"></script>
+
+    <!-- Test for Book.js --> 
+    <script type="module" src="./model/Book.test.js"></script>
+
+    <!-- Test for BookAdapter.js --> 
+    <script type="module" src="./controller/BookAdapter.test.js"></script>
+    <!-- ------------------------------------ -->
+
+    <!-- Tests for views -->
+    <script type="module" src="./view/appHeader/AppHeader.test.js"></script>
+    <script type="module" src="./view/appNavigation/AppNavigation.test.js"></script>
+    <script type="module" src="./view/bookAdder/BookAdder.test.js"></script>
+    <script type="module" src="./view/bookList/BookList.test.js"></script>
+    <script type="module" src="./view/bookDetail/BookDetail.test.js"></script>
+
+    <script type="module">
+        mocha.run();
+    </script>
+</head>
+
+<body>
+    <div id="mocha"></div>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "bookstore-backend",
+  "version": "1.0.0",
+  "description": "This is the bookstore backend: It serves as static webserver and API to get books data...",
+  "main": "staticServer.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./staticServer.js"
+  },
+  "keywords": [
+    "backend",
+    "server",
+    "data storage"
+  ],
+  "author": "Konstantin Oliver Paul",
+  "license": "CC-BY-3.0-DE",
+  "dependencies": {
+    "node-static": "^0.7.11"
+  }
+}

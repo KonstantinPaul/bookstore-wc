@@ -1,0 +1,51 @@
+/* book detail styling */
+
+.book-detail {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  grid-row-gap: max(1em, 2vmax);
+
+  font-size: calc(0.9em + 0.2vw);
+}
+
+.book-detail-header {
+  grid-column: 2;
+
+  display: grid;
+  place-items: center;
+}
+
+.book-detail-meta-data {
+  margin: 0; /* reset margin on <dl> element */
+
+  display: grid;
+  grid-gap: 1vw 2vh;
+  align-items: center;
+}
+
+.book-detail-meta-data dt {
+  grid-column: 1;
+  font-weight: bold;
+  justify-self: end;
+}
+
+.book-detail-meta-data dd {
+  margin: 0; /* reset default margin */
+
+  grid-column: 2;
+  justify-self: left;
+}
+
+.book-detail-meta-data dt:after {
+  content: ":";
+}
+
+.book-detail-symbol {
+  font-size: max(1.2em, 6vmax);
+}
+
+.book-detail-description {
+  margin: 0; /* they don't need margin, because grid is divided by rows gaps */
+  grid-column: 2;
+  line-height: 1.4;
+}

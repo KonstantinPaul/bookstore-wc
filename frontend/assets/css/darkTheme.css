@@ -1,0 +1,22 @@
+/** Set some variables **/
+:root {
+  --foregroundColor: whitesmoke; 
+  --linkColor: orange;
+  --appHeaderBGLightness: 35;
+
+  /* different lighter versions of background color */
+  --backgroundLightness: 9;
+  --bgLightnessPlus50: calc(var(--backgroundLightness) * 1.5);
+  --bgLightnessTimes2: calc(var(--backgroundLightness) * 2);
+ 
+  /* Set background color, default hex value: #171717 */
+  --backgroundColor: hsl(0, 0%, calc(var(--backgroundLightness, 9) * 1%));
+
+  /** All varialbes for book list **/
+  --tableHeadColor: initial;
+  --tableHeadBackgroundColor: initial;
+
+  --rowFocusColor: hsl(0, 0%, calc(var(--bgLightnessTimes2) * 1%));
+  --tableCellBackgroundColorEven: hsl(0, 0%, calc(var(--bgLightnessPlus50) * 1%));
+  --tableCellBorderColor: grey;
+}

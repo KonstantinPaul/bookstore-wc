@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
+
+  <!-- Custom CSS: Theming and other basic styles -->
+  <link type="text/css" rel="stylesheet" href="./assets/css/style.css">
+  <link id="theme" type="text/css" rel="stylesheet" href="./assets/css/lightTheme.css">
+
+  <!-- Include other CSS -->
+  <title>The Bookstore</title>
+</head>
+
+<body>
+  <!-- App Header with integrated "theme switcher" -->
+  <app-header></app-header>
+  
+  <!-- Navigation for app -->
+  <app-navigation class="bg-light"></app-navigation>
+  
+  <!-- Main content goes in here, namely each view and the messageBox -->
+  <main id="main">
+    <div id="messageSpace">
+      <!-- Uncomment, if you want to see all message types -->
+      <!--
+      <message-box message="This is an info message" type="info"></message-box>
+      <message-box message="This is an error" type="error"></message-box>
+      <message-box message="This is a success message" type="success"></message-box>
+      <message-box message="This is a warning message" type="warning"></message-box>
+      -->
+    </div>
+    <div id="viewSpace"></div>
+  </main>
+
+  <!-- TODO: Include footer -->
+
+  <!-- Load app's JavaScript as ES6 modules -->
+  <script type="module" src="./src/app.js" defer></script>
+</body>
+</html>

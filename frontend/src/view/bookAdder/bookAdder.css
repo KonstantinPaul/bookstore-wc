@@ -1,0 +1,61 @@
+
+.book-adder-container {
+  /* center container */
+  display: block;
+  margin: auto;
+  max-width: 80vw;
+  min-height: 100vh;
+}
+
+.book-adder-container h1 {
+  margin: 1.5rem 0;
+}
+
+/** Form styling **/
+
+form {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.field {
+  grid-column: span 2;
+  display: grid;
+  grid: inherit;
+  grid-gap: inherit;
+
+  /** first fallback version for browser doesn't support subgrid **/
+  grid-template-columns: 10ch 1fr;
+  grid-template-columns: subgrid;
+
+  cursor: pointer;
+}
+
+.form-control {
+  width: 100%;
+  border: 1px solid var(--button-shadow-color, skyblue);
+  padding: 1vmin;
+}
+
+.form-control:focus {
+  outline: 2px solid var(--button-shadow-color, skyblue);
+}
+
+textarea.form-control {
+  height: 15em; /** is equal set "rows" attribute */
+  resize: vertical;
+}
+
+/** TODO: Add CSS for invalid formular fields **/
+
+/** Style button **/
+
+/** Algin submit button in form **/
+.form-control.btn-success {
+  grid-column: 2;
+  width: max(10ch, 10vw);
+  justify-self: right;
+}
+

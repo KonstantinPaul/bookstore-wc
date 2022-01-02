@@ -1,0 +1,132 @@
+/* 
+  Created on : 28.12.2021
+  Author     : konstantin
+  Description: This is for the <app-navigation>
+*/
+
+/** Reset styles for ul and li **/
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/** Navigation in general is styled **/
+
+.nav {
+  background-color: var(--navigationBackgroundColor, #333);
+  min-height: max(5vh, 50px);
+  display: flex;
+  gap: 0.1rem;
+}
+
+.nav-item {
+  flex: 1 1 auto;
+}
+
+/* navigation <a>-tags */
+
+.nav-link {
+  color: var(--navigationLinkColor, white);
+  background-color: var(--navigationLinkBackgroundColor, #333);
+  text-decoration: none;
+  height: 100%;
+  /* this is for aligning the content in the "a"-tags */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* nav-link "active" state */
+
+.nav-link.active,
+.isDisabled > .nav-link.active.disabled /** This selector is for book details which shouldn't be clicked but still active on details page **/
+{
+  --navigationLinkColor: orange;
+  --navigationLinkBackgroundColor: #444;
+}
+
+/** set hover and focus state **/
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:active {
+  --navigationLinkColor: orange;
+  --navigationLinkBackgroundColor: #444;
+  border: 1px solid var(--navigationLinkColor);
+  outline: 1px solid var(--navigationLinkColor);
+  height: 97%;
+}
+
+/* Special styles for "Book details" link, which is not clickable per default, 
+ * but is highlighted when a "Book details"-page is shown
+ */
+
+.isDisabled {
+  cursor: not-allowed;
+}
+
+.isDisabled>.nav-link.disabled {
+  --navigationLinkColor: grey;
+  --navigationLinkBackgroundColor: #333;
+  pointer-events: none;
+}
+
+/*********************************************/
+/* style icons before nav-link
+ * TODO: Implement icons into nav
+ */
+
+/*
+.nav-link:hover .icon,
+.nav-link.active .icon {
+   fill: greenyellow;
+}
+*/
+
+/* navigation icons */
+
+/*
+.nav .icon {
+   height: 2.5em;
+   margin-right: 1rem;
+   fill: #999;
+}
+*/
+
+/* hide navigation svg */
+
+/*
+.dont-render-svg-icons {
+   display: none;
+}
+*/
+
+/* subtext for navigation item */
+
+/*
+span.nav-teaser {
+   display: block;
+   color: var(--navigationTeaserColor, #888);
+   margin: 0.25rem 0 0 0;
+}
+*/
+
+@media all and (max-width: 768px) {
+  .nav {
+    height: auto;
+    flex-flow: column;
+  }
+  .nav-link {
+    flex-flow: column;
+    padding: 2vh 0;
+    /* align text and 'teaser-text' in the center for mobile */
+    text-align: center;
+  }
+  .nav .icon {
+    margin: auto;
+    /* reset the margin from "desktop-mode"  */
+  }
+}
