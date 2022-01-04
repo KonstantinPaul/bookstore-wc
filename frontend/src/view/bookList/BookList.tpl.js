@@ -10,10 +10,13 @@ tableTemplate.innerHTML = `
 </style>
 
 <article>
+  <!-- This <book-search> is replaced again by connectedCallback() -->
+  <book-search></book-search>
+
   <h1>
     <span id="bookCount">0</span> books are shown
   </h1>
-
+  
   <table id="bookListTable">
     <thead>
       <tr>

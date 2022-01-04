@@ -2,6 +2,7 @@ const assert = chai.assert; // using chaijs as an "comparison" library
 import BookStore from "../../src/model/BookStore.js";
 import Book from "../../src/model/Book.js";
 import BookAdapter from "../../src/controller/BookAdapter.js";
+import BookList from "../../src/view/bookList/BookList.js";
 
 /* This is a test if the BookAdapter transform the "correct" way */
 /* It saves 5 "Harry Potter" books before via the "BookStore" object.
@@ -63,7 +64,8 @@ describe("BookAdapter", () => {
   it("Transform <books> into bookListView", () => {
     // transform <books> into Array of book (json) objects
     const storedBooks = bookStore.getBooks();
-    const bookObjects = BookAdapter.transformBookList(storedBooks);
+    const bookListComponent = document.createElement("book-list");
+    const bookObjects = BookAdapter.transformBookList(bookListComponent, storedBooks);
 
     // expect title, isbn and author to have been set
     const previewHarryPotterArr = harryPotterBooks.map(book => {

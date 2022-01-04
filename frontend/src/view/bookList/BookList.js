@@ -1,10 +1,14 @@
 import { tableTemplate, tableRowTemplate } from "./BookList.tpl.js";
 
+// This is imported, because it is a subcomponent in <book-list>
+import BookSearch from "../bookSearch/BookSearch.js";
+
 export default class BookList extends HTMLElement {
 
   #controller;
   #table; // this is the table element, where the books are stored
   #tableBody; // this is the tbody, where "book" rows are added
+  #bookSearch; // This is the custom element <book-search>
   #books; // this is the new list of books
 
   constructor() {
@@ -19,6 +23,7 @@ export default class BookList extends HTMLElement {
     this.#table.addEventListener("click", this.#evaluateTableClick.bind(this));
 
     this.#tableBody = this.#table.querySelector("tbody");
+    this.#bookSearch = new BookSearch();
   }
 
   // one-way setter for controller
@@ -27,15 +32,29 @@ export default class BookList extends HTMLElement {
       throw new TypeError("BookAdder: Controller was already set");
     }
     this.#controller = newController;
+
+    // set controller for bookSearch as well
+    this.#bookSearch.controller = newController;
   }
 
   get controller() {
     throw new Error("BookList: Controller is a read-only property");
   }
 
+  get bookSearch() {
+    return this.#bookSearch;
+  }
+
   set books(newBookList) {
     // add books to tbody as table rows
     this.#books = newBookList;
+
+    // remove all tr from tbody
+    for (const row of this.#tableBody.querySelectorAll("tr")) {
+      row.remove();
+    }
+    
+    // add books as rows to tbody
     for (const newBook of this.#books) {
       this.#addBook(newBook);
     }
@@ -48,7 +67,10 @@ export default class BookList extends HTMLElement {
     return this.#books;
   }
 
-  connectedCallback() {}
+  connectedCallback() {
+    const bookSearch = this.shadowRoot.querySelector("book-search");
+    bookSearch.replaceWith(this.#bookSearch);
+  }
 
   disconnectedCallback() {
     this.#table.removeEventListener("click", this.#evaluateTableClick);

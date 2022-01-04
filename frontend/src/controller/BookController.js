@@ -28,14 +28,43 @@ export default class BookController {
   /**
    * Displays Book List
    * Route: #/book/list
+   *
+   * @params(@URLSearchParams): These are search params to filter books
    */
   renderListView(params) {
-    const books = this.#bookModel.getBooks();
-
     try {
-      // transform books XML to <book-list> element
-      const bookListElement = BookAdapter.transformBookList(books);
-      bookListElement.controller = this; // set controller for removing books
+      // extract searchKey and searchParam from params
+      let searchKey, searchValue = "";
+      if (!!params) {
+        for (const pair of params.entries()) {
+          searchKey = pair[0];
+          searchValue = pair[1];
+          // expect first key-value-pair to be the search
+          break;
+        }
+      }
+
+      // search books
+      const books = this.#bookModel.getBooks({
+        "searchKey": searchKey,
+        "searchValue": searchValue
+      });
+      
+      // evaluate if <book-list> is already there, if not then create new element
+      let bookListElement = this.#viewSpace.querySelector("book-list");
+      if (!bookListElement) {
+        // create new <book-list> element
+        bookListElement = document.createElement("book-list");
+        bookListElement.controller = this;
+      }
+
+      // update search with search params!
+      bookListElement.bookSearch.setAttribute("search-key", searchKey);
+      bookListElement.bookSearch.setAttribute("search-value", searchValue);
+
+      // transform books XML and set them to <book-list> element
+      bookListElement = BookAdapter.transformBookList(bookListElement, books);
+
       this.#renderView(bookListElement);
     } catch (err) {
       this.#addMessageBox({
@@ -62,11 +91,11 @@ export default class BookController {
    * Params: isbn=12309124
    * Example Route: #/book/details?isbn=1234567899
    *
-   * @param {isbn: "<isbn value>"}
+   * @param URLSearchParams: This is an URL search param
    */
   renderDetailsView(params) {
     try {
-      const { isbn } = params;
+      const isbn = params.get("isbn");
       const book = this.#bookModel.getBookDetails(isbn);
 
       const bookDetailElement = BookAdapter.transformBookDetails(book);
@@ -111,6 +140,24 @@ export default class BookController {
   }
 
   /**
+   * Append search params to #/book/list route
+   *
+   * @param searchObject: {"<bookProperty>": "<searchValue>"} 
+   */
+  searchBook(searchObject) {
+
+    let searchRouteHash = `/book/list`;
+    if (searchObject) {
+      const searchKey = Object.keys(searchObject)[0] || "";
+      const searchValue = searchObject[searchKey] || "";
+      searchRouteHash += `?${searchKey}=${searchValue}`;
+    }
+
+    console.debug("searchBook(): new hash:", searchRouteHash);
+    window.location.hash = searchRouteHash;
+  }
+
+  /**
    * Deleting a Book from the List
    *
    * @param {String} isbn 
@@ -140,7 +187,7 @@ export default class BookController {
     "type": "info",
     "message": ""
   }) {
-    const { type, message } = params;
+    const {type, message} = params;
 
     const messageBox = new MessageBox();
     messageBox.setAttribute("type", type);

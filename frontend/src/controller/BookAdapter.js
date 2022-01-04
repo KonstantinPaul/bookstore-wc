@@ -6,17 +6,19 @@
  */
 export default class BookAdapter {
 
-  static transformBookList(booksXMLDocument) {
+  static transformBookList(
+    bookListComponent = document.createElement("book-list"), 
+    booksXMLDocument
+  ) {
     const bookElementList = booksXMLDocument.querySelectorAll("book");
-    const bookListComponent = document.createElement("book-list");
 
     // run through bookElements and extract title, isbn and author for <book-list>
     const bookPreviewArray = [];
-    for (let i = 0; i < bookElementList.length; i++) {
+    for (const bookNode of bookElementList) {
       const newBook = {};
-      newBook.title = bookElementList.item(i).getAttribute("title");
-      newBook.isbn = bookElementList.item(i).getAttribute("isbn");
-      newBook.author = bookElementList.item(i).getAttribute("author");
+      newBook.title = bookNode.getAttribute("title");
+      newBook.isbn = bookNode.getAttribute("isbn");
+      newBook.author = bookNode.getAttribute("author");
 
       bookPreviewArray.push(newBook);
     }

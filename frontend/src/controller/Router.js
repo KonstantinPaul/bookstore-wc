@@ -62,38 +62,23 @@ export default class Router {
      * @return object like: {
          "<model>": {
              "method": "<method>",
-             // params could be transformed to array to process multiple params
-             "params": {
-                 "<param>": "<value>"
-             }
+             "params": searchParams (type @URLSearchParams)
          }
-     }
    */
   #extractRoute(hash) {
+    // transform hash to URL to easier extract pathname an search params from it
+    const url = new URL(window.location.hash.split("#")[1], location);
+    const searchParams = new URLSearchParams(url.search);
+
+    // first is mentioned the model an then methods
+    // for e.g. model = "book" will have different methods like "list", "add" or "detail"
+    const model = url.pathname.split("/")[1];
+    const method = url.pathname.split("/")[2];
+
     const route = {};
-    const s = hash.split("/");
-    const model = s[1]; // s[1], because first index is unused
-    // set <model> for e.g. book
-    route[model] = {}; // s[1], because first index is unused
-
-    const viewWithParams = s[s.length - 1].split("?");
-    const [methodName, paramsString] = viewWithParams;
-    route[model].method = methodName; // set method for e.g. list or add
-
-    // check if parameters are set
-    route[model].params = {};
-    if (viewWithParams.length === 2) {
-      const firstParamString = paramsString.split("&", 1)[0];
-
-      // set params, when string is not empty
-      if (firstParamString) {
-        const param = firstParamString.split("=")[0];
-        const paramValue = firstParamString.split("=")[1];
-
-        // decoded and trimmed paramValue
-        route[model].params[param] = decodeURIComponent(paramValue).trim();
-      }
-    }
+    route[model] = {};
+    route[model].method = method;
+    route[model].params = searchParams;
 
     return route;
   }
