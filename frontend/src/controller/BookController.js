@@ -21,6 +21,7 @@ export default class BookController {
 
   constructor() {
     this.#bookModel = new BookStore();
+
     this.#viewSpace = document.getElementById("viewSpace");
     this.#messageSpace = document.getElementById("messageSpace");
   }
@@ -58,7 +59,7 @@ export default class BookController {
         bookListElement.controller = this;
       }
 
-      // update search with search params!
+      // update search with search params
       bookListElement.bookSearch.setAttribute("search-key", searchKey);
       bookListElement.bookSearch.setAttribute("search-value", searchValue);
 
@@ -145,15 +146,18 @@ export default class BookController {
    * @param searchObject: {"<bookProperty>": "<searchValue>"} 
    */
   searchBook(searchObject) {
-
     let searchRouteHash = `/book/list`;
     if (searchObject) {
       const searchKey = Object.keys(searchObject)[0] || "";
-      const searchValue = searchObject[searchKey] || "";
+      let searchValue = searchObject[searchKey] || "";
+      // remove whitespaces in front and back of strings
+      if ((typeof searchValue) === "string") {
+        searchValue = searchValue.trim();
+      }
+
       searchRouteHash += `?${searchKey}=${searchValue}`;
     }
 
-    console.debug("searchBook(): new hash:", searchRouteHash);
     window.location.hash = searchRouteHash;
   }
 

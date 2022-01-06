@@ -19,7 +19,6 @@ describe("<book-list> is tested", () => {
   beforeEach(function() {
     // stub deleteBook(isbn) method from BookController
     sinon.createStubInstance(BookController);
-    this.deleteBookStub = sinon.stub(BookController.prototype, "deleteBook");
 
     // init new book list and append data to it, because 3 of 4 test cases needs to have book data being set
     const newBookList = new BookList();
@@ -86,6 +85,8 @@ describe("<book-list> is tested", () => {
   });
 
   it("Should remove book from table", async function() {
+    const deleteBookStub = sinon.stub(BookController.prototype, "deleteBook");
+
     // select row to delete and ISBN to verify deletion was complete
     const bookListTable = this.bookList.shadowRoot.querySelector("#bookListTable");
     const bookRowToDelete = bookListTable.querySelector("tbody tr:nth-child(3)");
@@ -99,20 +100,21 @@ describe("<book-list> is tested", () => {
 
     // assert that table row was deleted
     const bookCountInt = parseInt(this.bookList.shadowRoot.querySelector("#bookCount").textContent, 10);
-    assert.equal(bookCountInt, sampleBookPreviewList.length - 1,
-      "Book Counter should be one lesser, then count of sample data, because only one book row was deleted");
+    assert.equal(
+      bookCountInt, (sampleBookPreviewList.length - 1),
+      "Book Counter should be one lesser, then count of sample data, because only one book row was deleted"
+    );
 
     // assert that deleteBook() was called
-    assert.isTrue(this.deleteBookStub.calledOnce, "Expect deleteBook() on BookController to be called");
-    assert.equal(isbnToDelete, this.deleteBookStub.getCall(0).args[0], "ISBN was a parameter for deleteBook(isbn)");
+    assert.isTrue(deleteBookStub.calledOnce, "Expect deleteBook() on BookController to be called");
+    assert.equal(isbnToDelete, deleteBookStub.getCall(0).args[0], "ISBN was a parameter for deleteBook(isbn)");
 
     // assert that row was deleted
     assert.isNull(bookListTable.querySelector(`tbody tr[data-isbn='${isbnToDelete}']`), "Table row should be deleted from DOM (after animation)");
   });
 
   it("Should throw error while deleting book", async function() {
-    // restore stubs and replace them with "throwing Error" implementation for deleteBook(isbn)
-    sinon.restore();
+    // provoke Error from Controller, when deleting a book
     const deleteBookErrorStub = sinon.stub(BookController.prototype, "deleteBook").callsFake(() => { throw new Error("") });
 
     // isbn to remove
