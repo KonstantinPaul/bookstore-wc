@@ -16,7 +16,10 @@ bookSearchTemplate.innerHTML = `
   <form id="bookSearchForm">
     <label for="searchValue" class="field">
       <span class="label-text">Search value</span>
-      <input id="searchValue" class="form-control" type="search" placeholder="Search text suitable for search key" required>
+
+      <input id="searchValue" class="form-control" type="search" 
+             pattern=".{3,}" title="3 characters minimum" required
+             placeholder="Search text suitable for search key">
     </label>
     
     <label for="searchKey" class="field">
@@ -29,8 +32,8 @@ bookSearchTemplate.innerHTML = `
       </select>
     </label>
 
-    <input id="searchButton" type="submit" class="btn btn-success form-control" value="Search books">
-    <input id="resetButton" type="submit" class="btn btn-danger form-control" value="Clear search & reset fields">
+    <button id="searchButton" type="submit" class="btn btn-success">Search books</button>
+    <button id="resetButton" type="reset" class="btn btn-danger">Reset search</button>
   </form>
 </section>`;
 

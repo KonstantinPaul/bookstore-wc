@@ -22,11 +22,11 @@
   - ~~`BookController` getestet~~
   - ~~`Router` getestet: Siehe `TL3` hier hast du schon mit _Sinon_ (mocking library) gearbeitet. Du muss nur diesmal prüfen ob Methoden z. B. des Controllers aufgerufen werden. Es muss nicht überprüft werden, ob ein _wirklicher_ DOM-Update stattfindet!~~
   - ~~Model Tests überprüfen ggf. aktualisieren~~ (Keine Akutalisierung notwendig, evlt. wenn **OnlineBookStorage** dazu kommt, dann muss das Model und ggf. die Modeltests angepasst werden)
-- Noch ein paar Bücher zum Testen **permanent** auf Server legen, sodass ich diese **immer** in der App habe!
+- ~~Noch ein paar Bücher zum Testen **permanent** auf Server legen, sodass ich diese **immer** in der App habe!~~ (**Wichtig:** Aktuell werden Bücher aus `test/_resources/` über die `src/app.js` nachgeladen, wenn der `localStorage` gerade keine Bücher beinhaltet)
 
 **Weitere Features im TDD-Stil:**
 + ~~Suche für Bücher implementieren~~
-  - Styling von `<book-search>`
+  - Styling von `<book-search>` _[currently in progress]_
 + Rating für Bücher implementieren (vorerst nur innerhalb `BookList`)
 + _"Bücher verändern"_ implementieren, hierzu könnte `<book-adder>` erweitert werden evtl. Namen verändern in `<book-changer isbn="1569876516">`
 + Speichere das zuletzt gewählte "theme" im `localStorage`

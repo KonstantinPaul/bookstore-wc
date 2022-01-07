@@ -20,7 +20,7 @@ const sampleBookPreviewList = [{
   },
   {
     "title": "Die Eherne Stadt: Der 13. Paladin Band III",
-    "isbn": "38668019131",
+    "isbn": "3866801931",
     "author": "Torsten Weitze"
   },
   {

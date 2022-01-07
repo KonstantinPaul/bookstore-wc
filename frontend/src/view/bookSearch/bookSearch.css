@@ -1,14 +1,6 @@
 /*** TODO: Refactor old bookAdder.css to bookSearch.css !!! ***/
 
-.book-adder-container {
-  /* center container */
-  display: block;
-  margin: auto;
-  max-width: 80vw;
-  min-height: 100vh;
-}
-
-.book-adder-container h1 {
+h1 {
   margin: 1.5rem 0;
 }
 
@@ -16,21 +8,14 @@
 
 form {
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 5fr 3fr 3fr minmax(175px, 1fr);
   grid-gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.field {
-  grid-column: span 2;
+.field, select.form-control {
   display: grid;
-  grid: inherit;
-  grid-gap: inherit;
-
-  /** first fallback version for browser doesn't support subgrid **/
-  grid-template-columns: 10ch 1fr;
-  grid-template-columns: subgrid;
-
+  grid-gap: 0.2rem;
   cursor: pointer;
 }
 
@@ -38,25 +23,76 @@ form {
   width: 100%;
   border: 1px solid var(--button-shadow-color, skyblue);
   padding: 1vmin;
+
+  /* some font settings */
+  font-size: 1rem;
+  letter-spacing: 0.005em;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .form-control:focus {
   outline: 2px solid var(--button-shadow-color, skyblue);
 }
 
-textarea.form-control {
-  height: 15em; /** is equal set "rows" attribute */
-  resize: vertical;
+
+
+/** Algin submit button in form **/
+.btn-success {
+  grid-column: -3;
 }
 
-/** TODO: Add CSS for invalid formular fields **/
+/** Add CSS for invalid formular fields **/
+.form-control:invalid {
+  background-color: rgba(230, 0, 0, 0.2);
+  color: var(--foregroundColor);
+  border: 2px solid red;
+  outline: 1px solid red;
+}
 
-/** Style button **/
+.form-control:invalid:focus {
+  border: 1px solid var(--button-shadow-color, skyblue);
+  outline: 2px solid var(--button-shadow-color, skyblue);
+  /** TODO: Change color of SVG to match 'Dark theme' **/
+  background: url("https://assets.digitalocean.com/labs/icons/exclamation-triangle-fill.svg") no-repeat 95% 50% rgba(230, 0, 0, 0.2);
+  background-size: 25px;
+}
+
+input.form-control:valid:focus {
+  /** TODO: Change color of SVG to match 'Dark theme' **/
+  background: url("https://assets.digitalocean.com/labs/icons/hand-thumbs-up.svg") no-repeat 95% 50% lightgreen;
+  background-size: 25px;
+}
+
+
+/*** Style buttons ***/
+
+/** Style search button: Add icon to it **/
+
+button {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 0.2rem;
+}
+
+
+/** Add icon to search and reset buttons **/
+
+.btn.btn-success:before {
+  content: "\01F50D"; /* emoji: search loupe */
+  font-size: 1.65rem;
+}
+
+.btn.btn-danger:before {
+  content: "\01F975"; /* emoji: "hot face" */
+  font-size: 1.65rem;
+}
+
+
 
 /** Algin submit button in form **/
 .form-control.btn-success {
-  grid-column: 2;
-  width: max(10ch, 10vw);
-  justify-self: right;
+  grid-column: -3;
 }
 

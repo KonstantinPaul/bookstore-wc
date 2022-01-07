@@ -15,19 +15,24 @@
 /* When moving the mouse over the submit button, add a darker green color */
 .btn:hover,
 .btn:active,
-.btn:focus {
+.btn:focus,
+.btn:focus-visible {
   box-shadow: var(--button-shadow-color, skyblue) 0px 0px 5px 5px;
+  outline: 1px solid var(--button-shadow-color, skyblue);
 }
 
 /** button variants **/
 .btn-success {
   --button-background: #2A8000; /* Napier Green */
   --button-color: whitesmoke;
+  --button-borderColor: var(--button-background);
 }
 
-.btn-delete {
+/** defining delete or "danger" button (as alias) **/
+.btn-delete, .btn-danger {
   --button-background: #900603; /* Ruby */
   --button-color: whitesmoke;
+  --button-borderColor: var(--button-background);
   --button-shadow-color: tomato;
 }
 
