@@ -38,6 +38,8 @@
 
 .book-detail-meta-data dt:after {
   content: ":";
+  background-color: var(--backgroundColor);
+  color: var(--foregroundColor);
 }
 
 .book-detail-symbol {

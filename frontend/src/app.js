@@ -7,12 +7,12 @@ import AppNavigation from "./view/appNavigation/AppNavigation.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  const router = new Router(
-    new BookController(), 
-    new PageNotFoundView()
-  );
+  const router = new Router(new BookController(), new PageNotFoundView());
 
-  // init routing and render default view: "#/book/list"
-  router.route(); 
+  // set default route to list view for books
+  window.location.hash = "#/book/list";
+  
+  // trigger routing: Even when you are on #/book/list already and reload page
+  router.route("#/book/list");
 });
 

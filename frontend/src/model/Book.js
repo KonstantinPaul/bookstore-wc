@@ -12,7 +12,7 @@ export default class Book {
         const bookXMLDoc = (new LocalBookStorage()).books;
         this.bookElement = bookXMLDoc.createElement("book");
 
-        // iterate over the book object
+        // call setter (if there) for all given properties
         for (const key in bookObject) {
             this[key] = bookObject[key];
         }

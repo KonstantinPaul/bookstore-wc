@@ -20,8 +20,8 @@
   - ~~(UI) `<book-detail>` getestet~~
   - ~~`BookAdapter`: Fix Tests~~
   - ~~`BookController` getestet~~
-  - `Router` getestet: Siehe `TL3` hier hast du schon mit _Sinon_ (mocking library) gearbeitet. Du muss nur diesmal prüfen ob Methoden z. B. des Controllers aufgerufen werden. Es muss nicht überprüft werden, ob ein _wirklicher_ DOM-Update stattfindet!
-  - Model Tests überprüfen ggf. aktualisieren
+  - ~~`Router` getestet: Siehe `TL3` hier hast du schon mit _Sinon_ (mocking library) gearbeitet. Du muss nur diesmal prüfen ob Methoden z. B. des Controllers aufgerufen werden. Es muss nicht überprüft werden, ob ein _wirklicher_ DOM-Update stattfindet!~~
+  - ~~Model Tests überprüfen ggf. aktualisieren~~ (Keine Akutalisierung notwendig, evlt. wenn **OnlineBookStorage** dazu kommt, dann muss das Model und ggf. die Modeltests angepasst werden)
 - Noch ein paar Bücher zum Testen **permanent** auf Server legen, sodass ich diese **immer** in der App habe!
 
 **Weitere Features im TDD-Stil:**
