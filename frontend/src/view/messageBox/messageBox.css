@@ -100,12 +100,12 @@
 }
 
 @media all and (max-width: 768px) {
-  header {
-    grid-template-areas: "bl theme theme br" "bl headerInfo headerInfo br";
-    grid-gap: 0;
-    padding: 1vmin;
-  }
-  .theme-section {
-    justify-content: right;
+  .message-box {
+    grid-template-areas:
+      "bl closeButton closeButton br"
+      "bl title title br"
+      "bl messageText messageText br";
+    grid-row-gap: 2vh;
+    padding: 1.5vmin;
   }
 }

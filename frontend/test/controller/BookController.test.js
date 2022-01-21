@@ -163,12 +163,7 @@ describe("Test BookController", function() {
       }, Error);
 
       // assert that BookStore.addBook() was called only once
-      assert.isTrue(addBookErrStub.calledOnce, "BookStore.addBook() should throw the prepared error");
-
-      // assert that type and message of message box where set correctly
-      assert.isTrue(this.messageBoxSetAttributeStub.calledTwice);
-      assert.deepEqual(this.messageBoxSetAttributeStub.firstCall.args, ["type", "error"]);
-      assert.deepEqual(this.messageBoxSetAttributeStub.secondCall.args, ["message", preparedError.message]);
+      assert.isTrue(addBookErrStub.calledOnce, "BookStore.addBook() should throw the preparedError");
 
       // assert that window.location.hash stays on #/book/add route
       assert.notEqual(window.location.hash, "#/book/list", "Stay on #/book/add route");

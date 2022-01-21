@@ -89,6 +89,7 @@ describe("<book-list> is tested", () => {
 
     // select row to delete and ISBN to verify deletion was complete
     const bookListTable = this.bookList.shadowRoot.querySelector("#bookListTable");
+
     const bookRowToDelete = bookListTable.querySelector("tbody tr:nth-child(3)");
     const isbnToDelete = bookRowToDelete.dataset.isbn;
 

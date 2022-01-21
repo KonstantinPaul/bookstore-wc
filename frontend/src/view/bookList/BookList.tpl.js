@@ -35,7 +35,7 @@ tableTemplate.innerHTML = `
 
 const tableRowTemplate = document.createElement("template");
 tableRowTemplate.innerHTML = `
-<tr>
+<tr class="delete-animation">
   <td id="title"></td>
   <td id="author"></td>
   <td id="isbn"></td>

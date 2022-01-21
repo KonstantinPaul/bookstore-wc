@@ -6,7 +6,6 @@ import BookSearch from "../bookSearch/BookSearch.js";
 export default class BookList extends HTMLElement {
 
   #controller;
-  #table; // this is the table element, where the books are stored
   #tableBody; // this is the tbody, where "book" rows are added
   #bookSearch; // This is the custom element <book-search>
   #books; // this is the new list of books
@@ -18,11 +17,8 @@ export default class BookList extends HTMLElement {
     this.attachShadow({mode: "open"});
     this.shadowRoot.appendChild(tableTemplate.content.cloneNode(true));
 
-    // set event handlers for callbacks
-    this.#table = this.shadowRoot.getElementById("bookListTable");
-    this.#table.addEventListener("click", this.#evaluateTableClick.bind(this));
-
-    this.#tableBody = this.#table.querySelector("tbody");
+    // select table and inner tbody element for specified DOM access
+    this.#tableBody = this.shadowRoot.querySelector("#bookListTable > tbody");
     this.#bookSearch = new BookSearch();
   }
 
@@ -68,12 +64,18 @@ export default class BookList extends HTMLElement {
   }
 
   connectedCallback() {
+    // this replaces the empty <book-search> with the filled book search, which is also connected the BookController
+    // TODO: Find a way to pass <book-search> element to the <book-list> component from the outside
     const bookSearch = this.shadowRoot.querySelector("book-search");
     bookSearch.replaceWith(this.#bookSearch);
   }
 
   disconnectedCallback() {
-    this.#table.removeEventListener("click", this.#evaluateTableClick);
+    // remove event listeners from all delete buttons
+    const allDeleteButtons = this.#tableBody.querySelectorAll("tr #deleteButton");
+    for (const deleteButton of allDeleteButtons) {
+      deleteButton.removeEventListener("click", this.#deleteBook);
+    }
   }
 
 
@@ -106,7 +108,7 @@ export default class BookList extends HTMLElement {
 
     // set isbn to reference book to delete
     const deleteButton = row.querySelector("#deleteButton");
-    deleteButton.dataset.isbn = isbn;
+    deleteButton.addEventListener("click", this.#deleteBook.bind(this, isbn));
 
     // append row to tbody
     this.#tableBody.appendChild(row);
@@ -117,47 +119,34 @@ export default class BookList extends HTMLElement {
     this.shadowRoot.querySelector("#bookCount").textContent = rowCount;
   }
 
-  #evaluateTableClick(clickEvent) {
-    if (!this.#controller) {
-      throw new Error("BookList: Controller was not set for processing");
-    }
+  /**
+   * This function is an event handler for the delete button 
+   *
+   * @param isbn: ISBN to search book and delete
+   * @param clickEvent: This is the clickEvent to extract the button (trigger element) from 
+   */
+  async #deleteBook(isbn, clickEvent) {
+    // select book row and delete it
+    const rowToDelete = this.#tableBody.querySelector(`tr[data-isbn="${isbn}"]`);
+    const deleteButton = clickEvent.target;
+    deleteButton.disabled = true;
+    rowToDelete.classList.add("in-deletion");
 
-    const { target } = clickEvent;
-
-    // evaluate delete button 
-    const isDeleteButton = (target.type === "button" && target.id === "deleteButton");
-    if (isDeleteButton) {
-      // remove book by ISBN
-      const { isbn } = target.dataset;
-      this.#deleteBook(isbn, target);
-    }
-  }
-
-  async #deleteBook(isbn, deleteButton) {
+    // delete book from storage
     try {
-      // select book row and delete it
-      const rowToDelete = this.shadowRoot.querySelector(`tr[data-isbn="${isbn}"]`);
-      deleteButton.disabled = true;
-      rowToDelete.classList.add("in-deletion");
+      this.#controller.deleteBook(isbn);
 
-      // delete book from storage
-      try {
-        this.#controller.deleteBook(isbn);
-
-        // start row deletion animation
-        rowToDelete.classList.add("delete-animation", "animate-moveright");
-        rowToDelete.addEventListener("animationend", () => {
-          // remove row and update book counter
-          rowToDelete.remove();
-          this.#updateBookCounter();
-        });
-      } catch (deletionError) {
-        // reset table row on error
-        deleteButton.disabled = false;
-        rowToDelete.classList.remove("in-deletion");
-      }
-    } catch (err) {
-      console.error(err);
+      // start row deletion animation
+      rowToDelete.classList.add("animate-moveright");
+      rowToDelete.addEventListener("animationend", () => {
+        // remove row and update book counter
+        rowToDelete.remove();
+        this.#updateBookCounter();
+      });
+    } catch (deletionError) {
+      // reset table row on error
+      deleteButton.disabled = false;
+      rowToDelete.classList.remove("in-deletion");
     }
   }
 }

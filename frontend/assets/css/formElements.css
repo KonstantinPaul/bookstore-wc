@@ -51,7 +51,6 @@ input[type=checkbox] + label {
   align-content: center;
 }
 
-
 input[type=checkbox] + label:before {
   content: "\2714";
   border: 0.15rem solid #000;
@@ -88,4 +87,18 @@ input[type=checkbox]:checked:disabled + label:before {
   background-color: #bfb;
   border-color: #bfb;
 }
+
+/** Input Fields **/
+
+/** TODO: Valid input fields **/
+
+
+/** TODO: Invalid input fields **/
+input:focus:invalid,
+textarea:focus:invalid {
+  border: 1px solid red;
+  outline: 1px solid red;
+}
+
+
 

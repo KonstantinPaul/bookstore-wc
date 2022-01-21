@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   /** get some space between body elements */
   margin: auto;
@@ -24,4 +28,13 @@ app-header {
   max-width: 1400px; /** fix width for wider screens **/
   padding-top: 1vh; /** add some padding for messages and viewSpace **/
 }
+
+/** stick messages to top right corner **/
+/*
+#messageSpace {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+*/
 

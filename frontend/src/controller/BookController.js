@@ -118,26 +118,16 @@ export default class BookController {
    * @params: (type: Book) newBook: A new Book object instance of model class
    */
   addBook(newBook) {
-    try {
-      this.#bookModel.addBook(newBook);
+    this.#bookModel.addBook(newBook);
 
-      // show that book was successfully added
-      this.#addMessageBox({
-        "type": "success",
-        "message": `Book with ISBN ${newBook.isbn} was added successfully`
-      });
+    // show that book was successfully added
+    this.#addMessageBox({
+      "type": "success",
+      "message": `Book with ISBN ${newBook.isbn} was added successfully`
+    });
 
-      // redirect to book list after successful added book
-      window.location.hash = "/book/list";
-    } catch (err) {
-      this.#addMessageBox({
-        "type": "error",
-        "message": err.message
-      });
-
-      // throw error back to caller for further UI handling
-      throw err;
-    }
+    // redirect to book list after successful added book
+    window.location.hash = "/book/list";
   }
 
   /**
