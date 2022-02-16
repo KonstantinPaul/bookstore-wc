@@ -74,11 +74,16 @@ describe("<app-navigation> is tested", () => {
     assert.equal(detailLink.classList.contains("disabled"), true, "disabled class was not contained");
   });
 
-  it.skip("Navigate to Error Page", async function() {
-    //TODO: What should happen with navigation, when 404-page is shown?
+  it("Navigate to Error Page. Expect no active navigation link", async function() {
+    // change hash to not defined route
+    this.location.hash = "#/no/valid/route";
 
+    // get all active links
+    await TestHelpers.delay(5);
+    const allActiveNavLinks = this.navigation.querySelectorAll(".active");
+
+    assert.equal(allActiveNavLinks.length, 0, "Expect no active navigation link");
   });
-
 
   //TODO: Think about good other scenarios to test?
 

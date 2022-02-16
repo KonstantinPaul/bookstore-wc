@@ -5,7 +5,6 @@
 */
 
 /** Reset styles for ul and li **/
-
 ul,
 li {
   margin: 0;
@@ -14,7 +13,6 @@ li {
 }
 
 /** Navigation in general is styled **/
-
 .nav {
   background-color: var(--navigationBackgroundColor, #333);
   min-height: max(5vh, 50px);
@@ -27,7 +25,6 @@ li {
 }
 
 /* navigation <a>-tags */
-
 .nav-link {
   color: var(--navigationLinkColor, white);
   background-color: var(--navigationLinkBackgroundColor, #333);

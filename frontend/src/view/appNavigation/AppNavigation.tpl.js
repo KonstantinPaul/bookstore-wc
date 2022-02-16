@@ -10,7 +10,7 @@ appNavigationTemplate.innerHTML = `
   @import "${basePath}/appNavigation.css";
 </style>
 <nav>
-  <ul id="navigation" class="nav nav-tabs nav-fill">
+  <ul id="navigation" class="nav">
     <li class="nav-item">
       <a class="nav-link active" href="#/book/list">Book List</a>
     </li>
@@ -23,6 +23,11 @@ appNavigationTemplate.innerHTML = `
       </a>
     </li>
   </ul>
+<!--
+  Find a better way to slot navigation elements in maybe using "non-autonomous" elements.
+  Meaning custom "ul","li","a" elements
+  <slot name="navigation"></slot>
+-->
 </nav>
 `;
 

@@ -10,15 +10,19 @@ export default class AppNavigation extends HTMLElement {
     // when shadow mode is "open", then this.shadowRoot is not null and can be set
     this.attachShadow({mode: "open"});
     this.shadowRoot.appendChild(appNavigationTemplate.content.cloneNode(true));
-
-    // set event handlers for callbacks
-    this.#nav = this.shadowRoot.querySelector("#navigation");
-    window.addEventListener("hashchange", this.#updateActiveLink.bind(this));
   }
 
   connectedCallback() {
-    this.#updateActiveLink();
+    try {
+      // set event handlers for callbacks
+      this.#nav = this.shadowRoot.querySelector("#navigation");
+      window.addEventListener("hashchange", this.#updateActiveLink.bind(this));
+      //this.#updateActiveLink();
+    } catch (err) {
+      console.error(err);
+    }
   }
+
 
   disconnectedCallback() {
     window.removeEventListener("hashchange", this.#updateActiveLink);
@@ -29,9 +33,12 @@ export default class AppNavigation extends HTMLElement {
     const $currentLink = this.#nav.querySelector(".nav-link.active");
     const $targetLink = this.#nav.querySelector(`.nav-link[href*='${hashWithoutParams}'`);
 
-    // Nothing needs to be updated, 
-    // when targetLink either does not exists or is the same as current.
-    if (!$currentLink || !$targetLink || $currentLink.href === $targetLink.href) {
+    // remove current active tag, when targetLink is not found. (404-Error page is shown)
+    if ($currentLink && !$targetLink) {
+      $currentLink.classList.remove("active");
+    } else if (!$currentLink || !$targetLink || $currentLink.href === $targetLink.href) {
+      // When either targetLink nor currentLink does not exists or if they are the same,
+      // then nothing needs to be updated.
       return ;
     }
 
