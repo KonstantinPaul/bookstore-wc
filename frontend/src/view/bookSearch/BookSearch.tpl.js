@@ -18,8 +18,9 @@ bookSearchTemplate.innerHTML = `
       <span class="label-text">Search value</span>
 
       <input id="searchValue" class="form-control" type="search" 
-             pattern=".{3,}" title="3 characters minimum" required
-             placeholder="Search text suitable for search key">
+             required pattern="(\\w+){1}(\\s+\\w+)*"
+             title="At least 1 word without whitespaces is required"
+             placeholder="Search text suitable for search key e.g. Die">
     </label>
     
     <label for="searchKey" class="field">

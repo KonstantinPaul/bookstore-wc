@@ -11,7 +11,7 @@ tableTemplate.innerHTML = `
 
 <article>
   <!-- This <book-search> is replaced again by connectedCallback() -->
-  <book-search></book-search>
+  <slot name="book-search">Try to slot in <code><book-search></code> component</slot>
 
   <h1>
     <span id="bookCount">0</span> books are shown

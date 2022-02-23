@@ -6,6 +6,7 @@ import Book from "../model/Book.js";
 import BookAdder from "../view/bookAdder/BookAdder.js";
 import BookDetail from "../view/bookDetail/BookDetail.js";
 import BookList from "../view/bookList/BookList.js";
+import BookSearch from "../view/bookSearch/BookSearch.js";
 
 // MessageBox to create and show messages <message-box> elements
 import MessageBox from "../view/messageBox/MessageBox.js";
@@ -59,12 +60,22 @@ export default class BookController {
         bookListElement.controller = this;
       }
 
-      // update search with search params
-      bookListElement.bookSearch.setAttribute("search-key", searchKey);
-      bookListElement.bookSearch.setAttribute("search-value", searchValue);
-
       // transform books XML and set them to <book-list> element
       bookListElement = BookAdapter.transformBookList(bookListElement, books);
+
+      // add book-search as slotted element to <book-list>
+      let bookSearch = bookListElement.querySelector("book-search");
+      if (!bookSearch) {
+        // init search on first render
+        bookSearch = document.createElement("book-search");
+        bookSearch.controller = this;
+        bookSearch.setAttribute("slot", "book-search");
+        bookListElement.appendChild(bookSearch);
+      }
+
+      // update search with search params
+      bookSearch.setAttribute("search-key", searchKey);
+      bookSearch.setAttribute("search-value", searchValue);
 
       this.#renderView(bookListElement);
     } catch (err) {

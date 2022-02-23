@@ -43,14 +43,7 @@ form {
 }
 
 /** Add CSS for invalid formular fields **/
-.form-control:invalid {
-  background-color: rgba(230, 0, 0, 0.2);
-  color: var(--foregroundColor);
-  border: 2px solid red;
-  outline: 1px solid red;
-}
-
-.form-control:invalid:focus {
+input.form-control:invalid:focus {
   border: 1px solid var(--button-shadow-color, skyblue);
   outline: 2px solid var(--button-shadow-color, skyblue);
   /** TODO: Change color of SVG to match 'Dark theme' **/

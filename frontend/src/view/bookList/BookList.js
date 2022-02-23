@@ -7,7 +7,6 @@ export default class BookList extends HTMLElement {
 
   #controller;
   #tableBody; // this is the tbody, where "book" rows are added
-  #bookSearch; // This is the custom element <book-search>
   #books; // this is the new list of books
 
   constructor() {
@@ -19,7 +18,6 @@ export default class BookList extends HTMLElement {
 
     // select table and inner tbody element for specified DOM access
     this.#tableBody = this.shadowRoot.querySelector("#bookListTable > tbody");
-    this.#bookSearch = new BookSearch();
   }
 
   // one-way setter for controller
@@ -28,17 +26,10 @@ export default class BookList extends HTMLElement {
       throw new TypeError("BookAdder: Controller was already set");
     }
     this.#controller = newController;
-
-    // set controller for bookSearch as well
-    this.#bookSearch.controller = newController;
   }
 
   get controller() {
     throw new Error("BookList: Controller is a read-only property");
-  }
-
-  get bookSearch() {
-    return this.#bookSearch;
   }
 
   set books(newBookList) {
@@ -64,10 +55,7 @@ export default class BookList extends HTMLElement {
   }
 
   connectedCallback() {
-    // this replaces the empty <book-search> with the filled book search, which is also connected the BookController
-    // TODO: Find a way to pass <book-search> element to the <book-list> component from the outside
-    const bookSearch = this.shadowRoot.querySelector("book-search");
-    bookSearch.replaceWith(this.#bookSearch);
+
   }
 
   disconnectedCallback() {
