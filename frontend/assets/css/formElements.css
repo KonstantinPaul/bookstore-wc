@@ -36,57 +36,8 @@
   --button-shadow-color: tomato;
 }
 
-
 /** Checkbox styling **/
 
-/* Hide checkbox, the trick is to style the label:before pseudo element */
-input[type=checkbox] {
-  display: none;
-}
-
-input[type=checkbox] + label {
-  display: flex;
-  cursor: pointer;
-  align-items: center;
-  align-content: center;
-}
-
-input[type=checkbox] + label:before {
-  content: "\2714";
-  border: 0.15rem solid #000;
-  border-radius: 0.2rem;
-  display: inline-block;
-  text-align: center;
-  width: 1rem;
-  height: 1rem;
-  padding-bottom: 0.25rem; /** a quarter of the height **/
-  margin-right: 0.2rem;
-  color: transparent;
-  transition: all 200ms;
-}
-
-input[type=checkbox] + label:active:before {
-  transform: scale(0);
-}
-
-input[type=checkbox]:checked + label:before {
-  background-color: MediumSeaGreen;
-  border-color: MediumSeaGreen;
-  color: #fff;
-}
-
-/** Style disabled checkboxes **/
-
-input[type=checkbox]:disabled + label:before {
-  transform: scale(1);
-  border-color: #aaa;
-}
-
-input[type=checkbox]:checked:disabled + label:before {
-  transform: scale(1);
-  background-color: #bfb;
-  border-color: #bfb;
-}
 
 /** Input Fields **/
 

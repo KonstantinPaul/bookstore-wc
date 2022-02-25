@@ -24,7 +24,7 @@ appHeaderTemplate.innerHTML = `
     </p>
   </section>
   <section class="theme-section">
-    <input id="themeSwitch" type="checkbox">
+    <input id="themeSwitch" type="checkbox" class="checksign-input">
     <label id="themeLabel" for="themeSwitch">
     Dark Theme
     </label>
