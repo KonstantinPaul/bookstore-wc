@@ -33,8 +33,8 @@ bookSearchTemplate.innerHTML = `
       </select>
     </label>
 
-    <button id="resetButton" type="reset" class="btn btn-danger">Reset search</button>
     <button id="searchButton" type="submit" class="btn btn-success">Search books</button>
+    <button id="resetButton" type="reset" class="btn btn-danger">Reset search</button>
   </form>
 </section>`;
 
