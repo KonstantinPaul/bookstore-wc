@@ -227,5 +227,36 @@ describe("Test BookController", function() {
     });
   });
 
+  describe("updateBookRating(isbn, newRating)", function() {
+    it("should update book by ISBN and newRating", function() {
+      const updateBookRatingStub = sinon.stub(BookStore.prototype, "updateBookRating");
+
+      // update book rating
+      const isbn = "9878689095";
+      const rating = 4;
+      (new BookController()).updateBookRating(isbn, rating);
+
+      // assert that BookStore.deleteBook() was called properly
+      assert.isTrue(updateBookRatingStub.calledOnce);
+      assert.equal(updateBookRatingStub.firstCall.args[0], isbn, "ISBN was forwarded as first parameter");
+      assert.equal(updateBookRatingStub.firstCall.args[1], rating, "rating was forwarded as second parameter");
+    });
+
+    it("should show error message for incorrect update", function() {
+      const preparedError = new Error("update book rating went wrong");
+      const updateBookRatingStub = sinon.stub(BookStore.prototype, "updateBookRating").throws(() => preparedError);
+
+      // BookController.updateBookRating() does not throw an error, it only shows a message.
+      // Error handling from caller (<book-list>) is not expected.
+      assert.doesNotThrow(function() {
+        (new BookController()).updateBookRating()
+      }, Error);
+
+      // assert that an error message is printed out to user
+      assert.isTrue(this.messageBoxSetAttributeStub.calledTwice);
+      assert.deepEqual(this.messageBoxSetAttributeStub.firstCall.args, ["type", "error"]);
+      assert.deepEqual(this.messageBoxSetAttributeStub.secondCall.args, ["message", preparedError.message]);
+    });
+  });
 
 });

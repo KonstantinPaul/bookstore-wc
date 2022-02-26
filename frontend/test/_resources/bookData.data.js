@@ -13,6 +13,7 @@ const sampleBookPreviewList = [{
     "title": "Ahren: Der 13. Paladin Band I",
     "isbn": "3866801929",
     "author": "Torsten Weitze",
+    "rating": 0,
     "description": "Von seinem trunksüchtigen Vater verprügelt und von der Dorfjugend schikaniert, kann der heranwachsende Ahren sein Glück kaum fassen, als er bei der alljährlichen Eignungsprüfung von Falk dem Waldläufer als Lehrling auserwählt wird.Bei ihm lernt er das Bogenschießen und den Kampf gegen Dunkelwesen, bis am Tag der Frühlingszeremonie etwas Unerwartetes geschieht: Als Ahren den Götterstein berührt, beginnt dieser zu leuchten. Kurze Zeit später taucht ein mürrischer Magier auf und treibt Falk und Ahren zur Eile an, denn etwas Böses ist dabei, zu erwachen. Gemeinsam mit seinen ungleichen Gefährten begibt sich der junge Waldläufer auf eine gefahrvolle Reise zum Immergrün, dem Reich der Elfen, um deren Hilfe zu erbitten. Doch die Zeit ist knapp, denn ER, DER ZWINGT hat es auf Ahren abgesehen und ER setzt alles daran, ihn zu vernichten."
   },
   {

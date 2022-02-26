@@ -51,7 +51,7 @@ describe("<book-list> is tested", () => {
     const defaultBookList = new BookList();
     this.iframe.contentDocument.querySelector("book-list").replaceWith(defaultBookList);
 
-    // extract counter and 
+    // extract book counter 
     const bookCountElem = defaultBookList.shadowRoot.querySelector("#bookCount");
     const bookCountInt = parseInt(bookCountElem.textContent, 10);
 
@@ -60,7 +60,7 @@ describe("<book-list> is tested", () => {
 
     // assert book count = 0 and table headers in row
     assert.equal(bookCountInt, 0, "In an empty list are no books");
-    assert.sameOrderedMembers(thContentList, ["Title", "Author", "ISBN", "Detail", "Delete"], "Expect table headers to be in same order");
+    assert.sameOrderedMembers(thContentList, ["Title", "Author", "ISBN", "Rating", "Detail", "Delete"], "Expect table headers to be in same order");
   });
 
   it("Should add 11 books in correct order", function() {
@@ -68,7 +68,13 @@ describe("<book-list> is tested", () => {
     const bookCountElem = this.bookList.shadowRoot.querySelector("#bookCount");
     const bookCountInt = parseInt(bookCountElem.textContent, 10);
     const firstBookRow = this.bookList.shadowRoot.querySelector("#bookListTable tbody tr:first-child");
-    const firstBookRowCellData = Array.from(firstBookRow.querySelectorAll("td")).map(item => item.textContent);
+    const firstBookRowCellData = Array.from(firstBookRow.querySelectorAll("td")).map(item => {
+      if (item.querySelector("star-rating")) {
+        return item.value;
+      } else { 
+        return item.textContent;
+      }
+    });
 
     // assert that book counter was updated successfully 
     assert.equal(
@@ -82,6 +88,7 @@ describe("<book-list> is tested", () => {
     assert.equal(sampleBookPreviewList[0].author, firstBookRowCellData[1], "Author should be in second cell");
     assert.equal(sampleBookPreviewList[0].isbn, firstBookRowCellData[2], "Author should be in third cell");
     assert.equal(sampleBookPreviewList[0].isbn, firstBookRow.dataset.isbn, "ISBN should be set on row as data attribute for identifying book");
+    assert.equal(sampleBookPreviewList[0].rating, firstBookRow[3], "Check if <star-rating> value is the same as in book data");
   });
 
   it("Should remove book from table", async function() {
@@ -135,6 +142,27 @@ describe("<book-list> is tested", () => {
     assert.isNotNull(bookListTable.querySelector(`tbody tr[data-isbn='${isbnToDelete}']`), "Table row should be deleted from DOM (after animation)");
     assert.isFalse(deleteButton.disabled, "Button should be enabled again");
     assert.isFalse(bookRowToDelete.classList.contains("in-deletion"), "CSS class 'in-deletion' for indicating an runnig removal should be removed");
+  });
+
+  it("Should update rating value via ISBN", async function() {
+    const updateBookRating = sinon.stub(BookController.prototype, "updateBookRating");
+    
+    // select first table row
+    const firstBookRow = bookListTable.querySelector("tbody tr:first-child");
+    const isbn = firstBookRow.dataset.isbn;
+    const starRating = firstBookRow.querySelector("star-rating");
+    
+    // update starRating value above one
+    if (starRating.value === 0) {
+      starRating.value = 1;
+    } else {
+      starRating.value = 0;
+    }
+
+    // assert that updateBookRating(isbn, newRating) was called
+    assert.isTrue(deleteBookStub.calledOnce, "Expect updateBookRating() on BookController to be called");
+    assert.equal(isbnToDelete, deleteBookStub.getCall(0).args[0], "ISBN was passed as first parameter");
+    assert.equal(starRating.value, deleteBookStub.getCall(0).args[1], "Rating was passed as second parameter");
   });
 
 });
