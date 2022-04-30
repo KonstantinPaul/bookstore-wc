@@ -33,6 +33,10 @@ describe("BookStore update book calls", () => {
       assert.doesNotThrow(() => {
         this.bookStore.updateBookRating(validISBN, 2);
       });
+
+      const updatedBook = this.bookStore.getBookDetails(validISBN);
+      // TODO: Refactor and return Book model as API not XML document directly!
+      assert.equal(updatedBook.getAttribute("rating"), 2, "Rating was successfully updated");
     });
 
     // generate invalid test cases
@@ -47,8 +51,6 @@ describe("BookStore update book calls", () => {
             error, 
             expectedMessage
           );
-
-          assert.fail("updateBookRating() does not throw error as expected");
         }
       );
     }

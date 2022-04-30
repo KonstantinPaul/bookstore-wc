@@ -6,6 +6,7 @@ import LocalBookStorage from "./LocalBookStorage.js";
  * - deleting books by ISBN
  * - getting bookDetails by ISBN for one book
  * - getting (all) books
+ * - update a book by ISBN (currently only rating)
  */
 
 export default class BookStore {
@@ -49,6 +50,33 @@ export default class BookStore {
     }
 
     bookToDelete.remove();
+    this.storage.books = booksXML;
+
+    return this;
+  }
+
+  updateBookRating(isbn, rating) {
+    if (!isbn || !rating) {
+      throw new TypeError("updateBookRating(): isbn or rating are missing or invalid");
+    }
+
+    // cast and check rating value
+    rating = Math.floor(rating);
+    if (Number.isNaN(rating)) {
+      throw new TypeError("updateBookRating(): rating is not a number");
+    } else if (rating < 0 ||  rating > 5) {
+      throw new RangeError(`rating must be an integer number between 1 and 5. Given: ${rating}`);
+    }
+
+    // get book by ISBN [@TODO: Move this the part, where you get one book by ISBN to different function] 
+    const booksXML = this.getBooks();
+    const book = booksXML.getElementById(isbn);
+    if (!book) {
+      throw new Error(`updateBookRating(): Book for ISBN: ${isbn} was not found`);
+    }
+
+    // update book rating
+    book.setAttribute("rating", rating);
     this.storage.books = booksXML;
 
     return this;

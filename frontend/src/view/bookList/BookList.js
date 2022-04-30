@@ -98,6 +98,9 @@ export default class BookList extends HTMLElement {
     const deleteButton = row.querySelector("#deleteButton");
     deleteButton.addEventListener("click", this.#deleteBook.bind(this, isbn));
 
+    // TODO: Add <star-rating> element and add customEventListener with isbn bound to it
+
+
     // append row to tbody
     this.#tableBody.appendChild(row);
   }

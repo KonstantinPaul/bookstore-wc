@@ -17,7 +17,7 @@ const invalidRatingUseCases = [{
     },
     expectedError: {
       error: TypeError,
-      expectedMessage: "/isbn or rating missing/"
+      expectedMessage: "isbn or rating are missing"
     }
   },
   {
@@ -53,7 +53,7 @@ const invalidRatingUseCases = [{
     },
     expectedError: {
       error: TypeError,
-      expectedMessage: "/rating is not a number/"
+      expectedMessage: "rating is not a number"
     }
   },
   {

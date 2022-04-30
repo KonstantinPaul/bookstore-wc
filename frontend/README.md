@@ -28,6 +28,7 @@
 + ~~Suche für Bücher implementieren~~
   - ~~Styling von `<book-search>`~~
 + Rating für Bücher implementieren (vorerst nur innerhalb `BookList`)
+  - Diese Implementierung hat ein **nicht unwesentliches** Refacoring zur Folge: Zum einen muss `getBookDetails(isbn)` [Umbennenung: `getBook(isbn)`] das `Book`-Model zurückgeben, für besseren Zugriff. Desweiteren sollte `Book.js` auch um Validierung z. B. der ISBN oder des Ratings selbst erweitert werden, da dies `BookStore.js` entlastet. Beim Refacotring müssen mindestens `BookStore.js, BookAdapter.js, Book.js` angepasst werden. Evtl. könnte `BookStore` -> `BookList` umbenannt werden?
 + _"Bücher verändern"_ implementieren, hierzu könnte `<book-adder>` erweitert werden evtl. Namen verändern in `<book-changer isbn="1569876516">`
 + Speichere das zuletzt gewählte "theme" im `localStorage`
 
