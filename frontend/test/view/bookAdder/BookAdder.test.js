@@ -1,5 +1,4 @@
 const assert = chai.assert; // using chaijs as an "comparison" library
-import sinon from "../../../node_modules/sinon/pkg/sinon-esm.js";
 import TestHelpers from "../../TestHelpers.js";
 
 // load dependencies to instantiate or mock
