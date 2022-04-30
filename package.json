@@ -6,16 +6,12 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./staticServer.js"
+    "start": "http-server -p 8888 ./frontend/"
   },
-  "keywords": [
-    "backend",
-    "server",
-    "data storage"
-  ],
+  "keywords": ["simple webserver", "http-server"],
   "author": "Konstantin Oliver Paul",
   "license": "CC-BY-3.0-DE",
   "dependencies": {
-    "node-static": "^0.7.11"
+    "http-server": "^14.1.0"
   }
 }
